@@ -25,5 +25,5 @@ Route.group(() => {
     return { hello: 'world' }
   })
 
-  Route.resource("coworkers", "CoworkersController").apiOnly();
+  Route.resource('coworkers', 'CoworkersController').apiOnly();
 }).prefix('/api');
