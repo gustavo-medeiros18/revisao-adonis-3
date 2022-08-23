@@ -22,6 +22,18 @@ export default class CoworkersController {
     return results;
   }
 
+  public async update({ request, params }: HttpContextContract) {
+    const existentCoworker = await Coworker.findOrFail(params.id);
+    const newCoworkerData = request.body();
+
+    existentCoworker.name = newCoworkerData.name;
+    existentCoworker.age = newCoworkerData.age;
+    existentCoworker.originCity = newCoworkerData.originCity;
+
+    const results = await existentCoworker.save();
+    return results;
+  }
+
   public async destroy({ params }: HttpContextContract) {
     const existentCoworker = await Coworker.findOrFail(params.id);
     const results = await existentCoworker.delete();
