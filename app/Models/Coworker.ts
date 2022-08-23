@@ -14,6 +14,9 @@ export default class Coworker extends BaseModel {
   @column({ columnName: 'origin_city' })
   public originCity: string
 
+  @column()
+  public image: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
