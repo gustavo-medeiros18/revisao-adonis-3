@@ -21,4 +21,11 @@ export default class CoworkersController {
 
     return results;
   }
+
+  public async destroy({ params }: HttpContextContract) {
+    const existentCoworker = await Coworker.findOrFail(params.id);
+    const results = await existentCoworker.delete();
+
+    return results;
+  }
 }
