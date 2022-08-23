@@ -15,4 +15,10 @@ export default class CoworkersController {
 
     return results;
   }
+
+  public async show({ params }: HttpContextContract) {
+    const results = await Coworker.findOrFail(params.id);
+
+    return results;
+  }
 }
