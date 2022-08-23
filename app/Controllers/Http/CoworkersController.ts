@@ -9,4 +9,10 @@ export default class CoworkersController {
     response.status(201);
     return results;
   }
+
+  public async index() {
+    const results = await Coworker.all();
+
+    return results;
+  }
 }
