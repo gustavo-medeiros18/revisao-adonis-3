@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.string('name')
       table.string('age')
       table.string('origin_city')
+      table.string('image')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
