@@ -50,6 +50,19 @@ export default class CoworkersController {
     existentCoworker.age = newCoworkerData.age;
     existentCoworker.originCity = newCoworkerData.originCity;
 
+    const image = request.file('image', this.validationOptions);
+
+    if (image) {
+      const newImageName = `${uuidv4()}.${image.extname}`;
+
+      await image.move(Application.tmpPath('uploads'), {
+        name: newImageName,
+        overwrite: true
+      })
+
+      existentCoworker.image = newImageName;
+    }
+
     const results = await existentCoworker.save();
     return results;
   }
