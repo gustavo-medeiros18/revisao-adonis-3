@@ -5,6 +5,9 @@ export default class Contact extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column({ columnName: 'phone_number' })
+  public phoneNumber: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
