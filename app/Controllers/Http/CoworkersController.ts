@@ -1,9 +1,29 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Coworker from 'App/Models/Coworker';
+import Application from '@ioc:Adonis/Core/Application';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class CoworkersController {
+  private validationOptions = {
+    size: '10mb',
+    extnames: ['jpg', 'png', 'jpeg']
+  };
+
   public async store({ request, response }: HttpContextContract) {
     const coworkerData = request.body();
+    const image = request.file('image', this.validationOptions);
+
+    if (image) {
+      const storedImageName = `${uuidv4()}.${image.extname}`;
+
+      await image.move(Application.tmpPath('uploads'), {
+        name: storedImageName,
+        overwrite: false
+      })
+
+      coworkerData.image = storedImageName;
+    }
+
     const results = await Coworker.create(coworkerData);
 
     response.status(201);
