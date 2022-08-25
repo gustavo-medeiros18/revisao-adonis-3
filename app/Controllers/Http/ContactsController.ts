@@ -15,4 +15,13 @@ export default class ContactsController {
 
     return results;
   }
+
+  public async index({ params }: HttpContextContract) {
+    const coworkerId = params.id;
+    await Coworker.findOrFail(coworkerId);
+
+    const results = await Contact.query().where('coworker_id', coworkerId);
+
+    return results;
+  }
 }
