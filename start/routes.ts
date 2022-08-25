@@ -21,10 +21,6 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.get('/', async () => {
-    return { hello: 'world' }
-  })
-
   Route.resource('coworkers', 'CoworkersController').apiOnly();
 }).prefix('/api');
 
@@ -34,4 +30,4 @@ Route.group(() => {
   Route.get('contacts/:contactId','ContactsController.show');
   Route.put('contacts/:contactId','ContactsController.update');
   Route.delete('contacts/:contactId', 'ContactsController.delete');
-}).prefix('/api/coworkers/:id')
+}).prefix('/api/coworkers/:id');
