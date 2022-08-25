@@ -25,5 +25,6 @@ Route.group(() => {
     return { hello: 'world' }
   })
 
+  Route.post('/coworkers/:id/contacts', 'ContactsController.store');
   Route.resource('coworkers', 'CoworkersController').apiOnly();
 }).prefix('/api');
