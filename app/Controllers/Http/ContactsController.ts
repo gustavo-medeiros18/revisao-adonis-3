@@ -24,4 +24,14 @@ export default class ContactsController {
 
     return results;
   }
+
+  public async show({ params }: HttpContextContract) {
+    const coworkerId = params.id;
+    await Coworker.findOrFail(coworkerId);
+
+    const contactId = params.contactId;
+    const results = await Contact.findOrFail(contactId);
+
+    return results;
+  }
 }
