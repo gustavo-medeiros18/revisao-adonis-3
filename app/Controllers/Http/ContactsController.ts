@@ -34,4 +34,16 @@ export default class ContactsController {
 
     return results;
   }
+
+  public async delete({ params }) {
+    const coworkerId = params.id;
+    await Coworker.findOrFail(coworkerId);
+
+    const contactId = params.contactId;
+    const existentContact = await Contact.findOrFail(contactId);
+
+    const results = await existentContact.delete();
+
+    return results;
+  }
 }
