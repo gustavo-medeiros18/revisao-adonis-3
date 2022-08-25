@@ -35,6 +35,21 @@ export default class ContactsController {
     return results;
   }
 
+  public async update({ request, params }) {
+    const coworkerId = params.id;
+    await Coworker.findOrFail(coworkerId);
+
+    const contactId = params.contactId;
+    const existentContact = await Contact.findOrFail(contactId);
+    const newContactData = request.body();
+
+    existentContact.phoneNumber = newContactData.phoneNumber;
+
+    const results = await existentContact.save();
+
+    return results;
+  }
+
   public async delete({ params }) {
     const coworkerId = params.id;
     await Coworker.findOrFail(coworkerId);
