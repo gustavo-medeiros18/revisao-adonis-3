@@ -32,5 +32,6 @@ Route.group(() => {
   Route.post('contacts','ContactsController.store');
   Route.get('contacts','ContactsController.index');
   Route.get('contacts/:contactId','ContactsController.show');
+  Route.put('contacts/:contactId','ContactsController.update');
   Route.delete('contacts/:contactId', 'ContactsController.delete');
 }).prefix('/api/coworkers/:id')
