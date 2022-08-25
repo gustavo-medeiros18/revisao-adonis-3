@@ -1,3 +1,18 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Contact from 'App/Models/Contact';
+import Coworker from 'App/Models/Coworker';
 
-export default class ContactsController {}
+export default class ContactsController {
+  public async store({ request, response, params }: HttpContextContract) {
+    const coworkerId = params.id;
+    await Coworker.findOrFail(coworkerId);
+
+    const contactData = request.body();
+    contactData.coworkerId = coworkerId;
+
+    const results = Contact.create(contactData);
+    response.status(201);
+
+    return results;
+  }
+}
